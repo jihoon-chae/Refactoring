@@ -4,7 +4,7 @@ export default class Book {
     this.#reservations = [];
   }
 
-  addReservation(customer) {
+  addReservation(customer, isPriority = false) {
     this.#reservations.push(customer);
   }
 
@@ -14,3 +14,5 @@ export default class Book {
     );
   }
 }
+
+// 추가적인 기능 필요할때 매개변수로 불리언 넣는것 은 좋지 않음
