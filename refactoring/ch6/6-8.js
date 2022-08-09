@@ -17,8 +17,9 @@ export class NumberRange {
     return this.#max;
   }
 
-  contains(number){ // min과 max의 범위에 있는지 체크하는 함수
-    return number >= this.#min && number <= this.#max
+  contains(number) {
+    // min과 max의 범위에 있는지 체크하는 함수
+    return number >= this.#min && number <= this.#max;
   }
 }
 
@@ -34,11 +35,7 @@ const station = {
 };
 const operationPlan = new NumberRange(51, 53);
 
-const result = readingsOutsideRange(
-  station,
-  operationPlan.temperatureFloor,
-  operationPlan.temperatureCeiling
-);
+const result = readingsOutsideRange(station, operationPlan);
 
 console.log(result);
 
