@@ -1,16 +1,37 @@
 export function priceOrder(product, quantity, shippingMethod) {
+  // priceOrder함수 보면 배송비 한눈에 알 수 있음
+  // 기본제품 가격
   const basePrice = product.basePrice * quantity;
-  const discount =
+
+  // 할인가격 계산
+  const discount = calculateDiscountedPrice(product, quantity);
+
+  const shippingCost = calculateShippingCost(
+    basePrice,
+    quantity,
+    shippingMethod
+  );
+
+  // 총 가격 계산
+  return basePrice - discount + shippingCost;
+}
+
+function calculateDiscountedPrice(product, quantity) {
+  return (
     Math.max(quantity - product.discountThreshold, 0) *
     product.basePrice *
-    product.discountRate;
+    product.discountRate
+  );
+}
+
+function calculateShippingCost(basePrice, quantity, shippingMethod) {
   const shippingPerCase =
     basePrice > shippingMethod.discountThreshold
       ? shippingMethod.discountedFee
       : shippingMethod.feePerCase;
-  const shippingCost = quantity * shippingPerCase;
-  const price = basePrice - discount + shippingCost;
-  return price;
+
+  // 총배송비 계산(수량을 곱해서)
+  return quantity * shippingPerCase;
 }
 
 // 사용 예:
